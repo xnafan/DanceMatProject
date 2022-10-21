@@ -10,7 +10,7 @@ namespace DanceMatVisualizerWindow
     internal class CustomRenderPictureBox : PictureBox
     {
         private static Random _random = new Random();
-        public Dictionary<DanceMat.DanceMatButton, bool> ButtonPressed { get; set; } = new Dictionary<DanceMat.DanceMatButton, bool>();
+        public Dictionary<DanceMat.DanceMatButton, bool> ButtonPressed { get; private set; } = new Dictionary<DanceMat.DanceMatButton, bool>();
         private static readonly Pen _indicatorPenYellow = new Pen(Brushes.Yellow, 11);
         //private static readonly Pen _indicatorPenBlack = new Pen(Brushes.Black, 11);
         private static readonly Pen _indicatorPenRed = new Pen(Brushes.Red, 13);
