@@ -2,6 +2,11 @@
 
 namespace DanceMatClassLibrary
 {
+
+    /// <summary>
+    /// This class represents an event from the dance mat.
+    /// It stores which "Button" was involved, and the action (Pressed/Released).
+    /// </summary>
     public class DanceMatEventArgs : EventArgs
     {
         public DanceMatButton Button { get; set; }

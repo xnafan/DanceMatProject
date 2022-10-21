@@ -1,14 +1,9 @@
 ﻿using HIDInterface;
-using System.Collections;
 
 namespace DanceMatClassLibrary
 {
-    //Invaluable reference article by Ashley Deakin:
-    //http://www.developerfusion.com/article/84338/making-usb-c-friendly/
-
     //driver misidentification issue:
-    //https://forums.pcsx2.net/Thread-USBqemu-Buzz-New-Release?page=2
-    //1. Plug in the BUZZ Controllers/ the USB of it
+    //1. Plug in Dance Mat in a USB port
     //2. On Windows(10), go to Device Manager -> open USB Tab.There should be a one thats not working   (yellow triangle), called "Standard USB Hub".
     //3. Right click it -> Update Driver -> Browse my computer for driver software -> Let me pick from a list of device drivers on my computer -> Select "USB Input Device" -> Click OK.
 
@@ -19,6 +14,10 @@ namespace DanceMatClassLibrary
         #region Enumerations
         public enum DanceMatButtonAction { Unchanged, Pressed, Released };
         public enum DanceMatButton {
+            //Here I have added the bits in the 7th and 8th bytes
+            //in the 9 bytes that are sent from the dance map
+            //for easy reference
+
             Start = 8192,      //0 0 1 0 0 0 0 0  0 0 0 0 0 0 0 0
             Select = 4096,     //0 0 0 1 0 0 0 0  0 0 0 0 0 0 0 0
             Circle =2048,      //0 0 0 0 1 0 0 0  0 0 0 0 0 0 0 0
@@ -38,7 +37,10 @@ namespace DanceMatClassLibrary
         private byte[] _lastWriteData = new byte[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         
         HIDDevice _device;
-
+        //You must change these (VID/PID) to your type of Dance Mat,
+        //in case you can't connect using this. Then your dance mat may be another brand.
+        //Look in Device manager, find your "HID-Compliant game controller" and look in
+        //properties > details > property: hardware ID
         private const int DEVICE_VENDOR_ID = 0x0079;
         private const int DEVICE_PRODUCT_ID = 0x0011;
 
@@ -51,8 +53,10 @@ namespace DanceMatClassLibrary
             HIDDevice.interfaceDetails[] devices = HIDDevice.getConnectedDevices();
 
             //Select a device from the available devices (uses the Vendor ID and Product ID of the Dance Mat controller).
-            var dev = devices.Where(dev =>dev.VID == DEVICE_VENDOR_ID && dev.PID == DEVICE_PRODUCT_ID).FirstOrDefault();
-            if (dev.VID == 0) { throw new Exception("No 'Dance Mat' controller detected"); }
+            var dev = devices.Where(dev =>dev.VID == DEVICE_VENDOR_ID 
+                && dev.PID == DEVICE_PRODUCT_ID).FirstOrDefault();
+            
+            if (dev.VID == 0) { throw new Exception("No Dance Mat controller detected. Do you need to change the driver to 'HID-Compliant game controller' in Device Manager?"); }
 
             //register device, and set it up for publishing events when new data comes in
             _device = new HIDDevice(dev.devicePath, true);
@@ -62,7 +66,6 @@ namespace DanceMatClassLibrary
 
         }
         #endregion
-
 
         #region Internal functionality
 
@@ -77,20 +80,23 @@ namespace DanceMatClassLibrary
                 //Only look for the "button action" messages, which are 9 bytes in length
                 if(message.Length != 9) { return; }
 
-
                 //Now cancel out the first four bits of the seventh byte
+                //as it is filled with 1's 
                 message[6] = (byte)(message[6] & 240);
+
                 ushort lastBitArray = BitConverter.ToUInt16( new byte[] {_lastReadData[6], _lastReadData[7] });
                 ushort currentBitArray = BitConverter.ToUInt16(new byte[] {message[6], message[7] });
-                ushort bitValue = 1;
-                for (int bitPosition = 0; bitPosition < 14; bitPosition++)
+                
+                ushort bitValue = 16;   //we start five bits from the right
+                //and read ten bits in
+                for (int bitPosition = 0; bitPosition < 10; bitPosition++)
                 {
                     var action = GetActionFromBitChange((lastBitArray & bitValue) > 0, (currentBitArray & bitValue) > 0);
                     if (action != DanceMatButtonAction.Unchanged)
                     {
                         OnButtonStateChanged((DanceMatButton)bitValue, action);
                     }
-                    bitValue = (ushort)(bitValue << 1);
+                    bitValue = (ushort)(bitValue << 1); //multiply by 2 (go to next bit to the left)
                 }
                 _lastReadData = message.ToArray();
 
@@ -118,6 +124,5 @@ namespace DanceMatClassLibrary
             else { return DanceMatButtonAction.Pressed; }
         }
         #endregion
-
     }
 }
