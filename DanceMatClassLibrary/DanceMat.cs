@@ -77,7 +77,8 @@ namespace DanceMatClassLibrary
         {
             try
             {
-                //Only look for the "button action" messages, which are 9 bytes in length
+                //Only look for the "button action" messages (step or release on the mat tiles),
+                // which are 9 bytes in length
                 if(message.Length != 9) { return; }
 
                 //Now cancel out the first four bits of the seventh byte
