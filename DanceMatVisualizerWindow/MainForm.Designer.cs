@@ -41,8 +41,8 @@
             this.picBoxDanceMat.InitialImage = null;
             this.picBoxDanceMat.Location = new System.Drawing.Point(0, 0);
             this.picBoxDanceMat.Name = "picBoxDanceMat";
-            this.picBoxDanceMat.Size = new System.Drawing.Size(736, 910);
-            this.picBoxDanceMat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxDanceMat.Size = new System.Drawing.Size(785, 910);
+            this.picBoxDanceMat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBoxDanceMat.TabIndex = 0;
             this.picBoxDanceMat.TabStop = false;
             // 
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 910);
+            this.ClientSize = new System.Drawing.Size(785, 910);
             this.Controls.Add(this.picBoxDanceMat);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";

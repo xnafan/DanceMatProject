@@ -44,11 +44,16 @@ namespace DanceMatClassLibrary
         private const int DEVICE_VENDOR_ID = 0x0079;
         private const int DEVICE_PRODUCT_ID = 0x0011;
 
+        private Dictionary<DanceMatButton, bool> _buttonStates = new();
+
         #endregion
 
         #region Constructor
         public DanceMat()
         {
+            //initialize the button states dictionary with all buttons
+            Enum.GetValues<DanceMatButton>().ToList().ForEach(button => _buttonStates.Add(button, false));
+
             //Get the details of all connected USB HID devices
             HIDDevice.interfaceDetails[] devices = HIDDevice.getConnectedDevices();
 
@@ -63,10 +68,26 @@ namespace DanceMatClassLibrary
 
             //subscribe to data received event
             _device.dataReceived += _device_dataReceived;
-
         }
         #endregion
 
+
+        public DanceMatState GetCurrentState()
+        {
+            return new DanceMatState()
+            {
+                Circle = _buttonStates[DanceMatButton.Circle],
+                Square = _buttonStates[DanceMatButton.Square],
+                Triangle = _buttonStates[DanceMatButton.Triangle],
+                Cross = _buttonStates[DanceMatButton.Cross],
+                Start = _buttonStates[DanceMatButton.Start],
+                Select = _buttonStates[DanceMatButton.Select],
+                Up = _buttonStates[DanceMatButton.Up],
+                Down = _buttonStates[DanceMatButton.Down],
+                Left = _buttonStates[DanceMatButton.Left],
+                Right = _buttonStates[DanceMatButton.Right]
+            };
+        }
         #region Internal functionality
 
         /// <summary>
@@ -95,7 +116,9 @@ namespace DanceMatClassLibrary
                     var action = GetActionFromBitChange((lastBitArray & bitValue) > 0, (currentBitArray & bitValue) > 0);
                     if (action != DanceMatButtonAction.Unchanged)
                     {
-                        OnButtonStateChanged((DanceMatButton)bitValue, action);
+                        DanceMatButton button = (DanceMatButton)bitValue;
+                        _buttonStates[button] = action == DanceMatButtonAction.Pressed;
+                        OnButtonStateChanged(button, action);
                     }
                     bitValue = (ushort)(bitValue << 1); //multiply by 2 (go to next bit to the left)
                 }

@@ -1,4 +1,5 @@
 using DanceMatClassLibrary;
+using System.Diagnostics;
 
 namespace DanceMatVisualizerWindow
 {
@@ -17,6 +18,7 @@ namespace DanceMatVisualizerWindow
         private void _danceMat_ButtonStateChanged(object? sender, DanceMatEventArgs e)
         {
             picBoxDanceMat.ButtonPressed[e.Button] = e.Action == DanceMat.DanceMatButtonAction.Pressed;
+            Debug.WriteLine(_danceMat.GetCurrentState());
         }
 
         private void RepaintPictureBox()
