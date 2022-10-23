@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanceMatVisualizerWindow", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanceMatMazeGame", "DanceMatMazeGame\DanceMatMazeGame.csproj", "{88037F2C-50EA-4B0E-BE93-6EBF34EEB212}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanceMatDanceGame", "DanceMatDanceGame\DanceMatDanceGame.csproj", "{CE297365-8D20-4BF0-B5CA-80F6D9FB6D98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{88037F2C-50EA-4B0E-BE93-6EBF34EEB212}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88037F2C-50EA-4B0E-BE93-6EBF34EEB212}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88037F2C-50EA-4B0E-BE93-6EBF34EEB212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE297365-8D20-4BF0-B5CA-80F6D9FB6D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE297365-8D20-4BF0-B5CA-80F6D9FB6D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE297365-8D20-4BF0-B5CA-80F6D9FB6D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE297365-8D20-4BF0-B5CA-80F6D9FB6D98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

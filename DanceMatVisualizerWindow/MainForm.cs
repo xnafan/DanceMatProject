@@ -23,7 +23,6 @@ namespace DanceMatVisualizerWindow
 
         private void RepaintPictureBox()
         {
-            
             if (InvokeRequired) { Invoke(new Action(() => RepaintPictureBox()));}
             else { picBoxDanceMat.Refresh();}
         }
