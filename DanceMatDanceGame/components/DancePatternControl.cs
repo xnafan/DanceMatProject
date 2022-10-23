@@ -11,8 +11,7 @@ namespace DanceMatMazeGame.components
 {
     public class DancePatternControl
     {
-
-        public struct DanceMove 
+        public struct DanceMove : IEquatable<DanceMove>
         {
             public bool Up { get; set; } = false;
             public bool Down { get; set; } = false;
@@ -36,6 +35,11 @@ namespace DanceMatMazeGame.components
             }
 
             public List<bool> GetAllButtons() => new List<bool>() {Left, Down, Up, Right };
+
+            public bool Equals(DanceMove other)
+            {
+                return Up == other.Up && Down == other.Down && Left == other.Left && Right == other.Right;
+            }
         }
 
         #region Variables and properties
@@ -46,6 +50,8 @@ namespace DanceMatMazeGame.components
         public Texture2D ArrowTexture { get; }
         public List<DanceMove> DanceMoves { get; set; } = new();
         public DanceMat DanceMat { get; set; }
+
+        private DanceMatState _previousState;
 
         #endregion
 
@@ -63,19 +69,22 @@ namespace DanceMatMazeGame.components
         #region Methods
         public void Update(GameTime gameTime)
         {
-            CheckForDanceMatStateMatch();
+            CheckForDanceMatStateMatchAndRemoveIfMatch();
         }
 
-        private bool CheckForDanceMatStateMatch()
+        private bool CheckForDanceMatStateMatchAndRemoveIfMatch()
         {
-            if (DanceMoves.Count == 0) { return false; }
-            if (DanceMoves.First().TestForDanceMatStateMatch(DanceMat.GetCurrentState()))
+            bool match = false;
+            DanceMatState currentState = DanceMat.GetCurrentState();
+            if (DanceMoves.Count == 0 || _previousState.Equals(currentState)) { return false; }
+            if (DanceMoves.First().TestForDanceMatStateMatch(currentState))
             {
                 DanceMoves.RemoveAt(0);
                 AddRandomMove();
-                return true;
+                match = true;
             }
-            return false;
+            _previousState = currentState;
+            return match;
         }
 
         public void AddRandomMove()
