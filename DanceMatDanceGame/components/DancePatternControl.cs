@@ -40,6 +40,7 @@ namespace DanceMatMazeGame.components
             {
                 return Up == other.Up && Down == other.Down && Left == other.Left && Right == other.Right;
             }
+            public bool NothingPressed { get { return !(Up || Down || Right || Left); } }
         }
 
         #region Variables and properties
@@ -50,8 +51,7 @@ namespace DanceMatMazeGame.components
         public Texture2D ArrowTexture { get; }
         public List<DanceMove> DanceMoves { get; set; } = new();
         public DanceMat DanceMat { get; set; }
-
-        private DanceMatState _previousState;
+        private bool IsReadyForInput { get; set; } = false;
 
         #endregion
 
@@ -76,14 +76,16 @@ namespace DanceMatMazeGame.components
         {
             bool match = false;
             DanceMatState currentState = DanceMat.GetCurrentState();
-            if (DanceMoves.Count == 0 || _previousState.Equals(currentState)) { return false; }
+            if (currentState.NothingPressed) { IsReadyForInput = true; }
+            if (!IsReadyForInput) { return false; }
+            if (DanceMoves.Count == 0) { return false; }
             if (DanceMoves.First().TestForDanceMatStateMatch(currentState))
             {
                 DanceMoves.RemoveAt(0);
                 AddRandomMove();
                 match = true;
+                IsReadyForInput = false;
             }
-            _previousState = currentState;
             return match;
         }
 

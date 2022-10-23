@@ -14,6 +14,7 @@
         public bool Down { get; set; }
         public bool Right { get; set; }
 
+        public bool NothingPressed { get { return !(Start || Select || Circle || Cross || Square || Triangle || Up || Left || Down || Right); } }
         #endregion
 
         public override string ToString()
