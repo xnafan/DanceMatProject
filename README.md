@@ -27,4 +27,14 @@ Note that different brands of dance mats will identify themselves using other Ve
 The dance mat brand the code is written for:  
 ![image](https://user-images.githubusercontent.com/3811290/197620803-e65e9f2a-f897-4e13-83de-5b96c53ef216.png)
 
+# Using the DanceMat class
+It's as simple as this, to use the DanceMat class, if you have the right brand of dance mat:
 
+  using DanceMatClassLibrary;
+
+  //hooks an anonymous eventhandler (which writes the action that occurred)
+  //  up to the ButtonStateChanged event
+  new DanceMat().ButtonStateChanged += (object? sender, DanceMatEventArgs e) => Console.WriteLine(e);
+
+  //Waits for an ENTER press
+  Console.ReadLine();
