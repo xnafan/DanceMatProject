@@ -10,7 +10,7 @@ using DanceMatDanceGame.components;
 
 namespace DanceMatMazeGame.components
 {
-    public partial class DanceMovesListControl
+    public class DanceMovesListControl
     {
 
         #region Variables and properties
