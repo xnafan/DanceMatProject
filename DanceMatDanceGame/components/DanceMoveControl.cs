@@ -23,7 +23,7 @@ namespace DanceMatDanceGame.components
             DanceMove = danceMove;
         }
 
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime, float opacity = 1)
         {
             Rectangle destinationRectangle = new Rectangle((int)TopLeft.X, (int)TopLeft.Y, Size.Height, Size.Height);
             Rectangle sourceRectangle = new Rectangle(0, 0, ArrowTexture.Width / 4, ArrowTexture.Height / 2); ;
@@ -32,7 +32,7 @@ namespace DanceMatDanceGame.components
 
             for (int i = 0; i < 4; i++)
             {
-                if (moves[i]) { DanceGame.SpriteBatch.Draw(ArrowTexture, destinationRectangle, sourceRectangle, Color.White); }
+                if (moves[i]) { DanceGame.SpriteBatch.Draw(ArrowTexture, destinationRectangle, sourceRectangle, Color.White * opacity); }
                 destinationRectangle.Offset(Size.Width / 4, 0);
                 sourceRectangle.Offset(ArrowTexture.Width / 4, 0);
             }

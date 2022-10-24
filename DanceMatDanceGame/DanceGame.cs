@@ -2,6 +2,7 @@
 using DanceMatDanceGame.components;
 using DanceMatMazeGame.components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -19,6 +20,7 @@ public class DanceGame : Game
     public static SpriteFont RegularFont { get; set; }
     public static SpriteFont BigFont { get; set; }
     public static SpriteFont GiantFont { get; set; }
+    public static SoundEffect Drums { get; set; }
 
     public int Points { get; set; }
     private string _lastPrecision = "";
@@ -67,6 +69,7 @@ public class DanceGame : Game
         BigFont = Content.Load<SpriteFont>("fonts/bigfont");
         GiantFont = Content.Load<SpriteFont>("fonts/giantfont");
         _squareTexture = Content.Load<Texture2D>("gfx/tile_16x16");
+        Drums = Content.Load<SoundEffect>("sfx/bass");
         _dancingCow = new AnimatedImage(new Vector2(1300, 400), Content.Load<Texture2D>("gfx/dancecowanimation"), 200, 4, 2);
     }
     #endregion

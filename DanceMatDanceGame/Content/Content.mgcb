@@ -70,3 +70,15 @@
 /processorParam:TextureFormat=Color
 /build:gfx/Tile_16x16.png
 
+#begin sfx/bass.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/bass.wav
+
+#begin sfx/mixkit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/mixkit.wav
+

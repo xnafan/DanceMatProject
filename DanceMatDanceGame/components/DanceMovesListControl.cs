@@ -47,7 +47,13 @@ namespace DanceMatMazeGame.components
         {
             DanceMoveControls.ForEach(control => control.TopLeft += Vector2.UnitY * (float)gameTime.ElapsedGameTime.TotalMilliseconds * -Speed * .05f);
             CheckForDanceMatStateMatchAndRemoveIfMatch();
-            if(DanceMoveControls.FirstOrDefault()?.TopLeft.Y < TopLeft.Y - ArrowSymbolSize / 2)
+            var topDanceControl = DanceMoveControls.FirstOrDefault();
+            if(topDanceControl == null) { return; }
+            if (Math.Abs(topDanceControl.TopLeft.Y - TopLeft.Y) < 2)
+            {
+                DanceGame.Drums.Play();
+            }
+            if (topDanceControl.TopLeft.Y < TopLeft.Y - ArrowSymbolSize / 2)
             {
                 SuccessfulDanceMove?.Invoke(this, new DanceMoveSuccesRate(DanceMoveControls.First().DanceMove, DanceMoveSuccesRate.Precision.Lost));
                 DanceMoveControls.RemoveAt(0);
@@ -118,7 +124,8 @@ namespace DanceMatMazeGame.components
             DanceGame.SpriteBatch.Draw(ArrowTexture, new Rectangle((int)TopLeft.X, (int)TopLeft.Y, ArrowSymbolSize * 4, ArrowSymbolSize),
                 new Rectangle(0,0, ArrowTexture.Width, ArrowTexture.Height/2),
                 Color.LightGreen);
-            DanceMoveControls.ForEach(control => control.Draw(gameTime));
+            float opacity = 1;
+            DanceMoveControls.ForEach(control => control.Draw(gameTime, opacity-=.15f));
         }
 
         #endregion
