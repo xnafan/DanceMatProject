@@ -1,4 +1,5 @@
 ﻿using DanceMatClassLibrary;
+using DanceMatDanceGame.components;
 using DanceMatMazeGame.components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,8 +13,14 @@ public class DanceGame : Game
     private GraphicsDeviceManager _graphics;
     public static SpriteBatch SpriteBatch { get; set; }
     private Texture2D _arrowTexture;
-    private DancePatternControl _dancePatternControl;
+    private AnimatedImage _dancingCow;
+    
+    private DanceMovesListControl _dancePatternControl;
     public DanceMat DanceMat { get; set; }
+    public static SpriteFont RegularFont { get; set; }
+    public static SpriteFont BigFont { get; set; }
+    public int Points { get; set; }
+    private string _lastPrecision;
 
 
     public DanceGame()
@@ -31,12 +38,23 @@ public class DanceGame : Game
         _graphics.PreferredBackBufferWidth = 1920;
         _graphics.PreferredBackBufferHeight = 1024;
         
-        //ToggleFullScreen();
+       // ToggleFullScreen();
         _graphics.ApplyChanges();
-        _dancePatternControl = new DancePatternControl(_arrowTexture, new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 100), new drawing.Size(1024, 256), DanceMat);
+        _dancePatternControl = new DanceMovesListControl(_arrowTexture, new Vector2(200,100), 128, DanceMat);
         _dancePatternControl.AddRandomMove();
         _dancePatternControl.AddRandomMove();
         _dancePatternControl.AddRandomMove();
+        _dancePatternControl.AddRandomMove();
+        _dancePatternControl.AddRandomMove();
+
+        _dancePatternControl.SuccessfulDanceMove += _dancePatternControl_SuccessfulDanceMove;
+    }
+
+    private void _dancePatternControl_SuccessfulDanceMove(object sender, DanceMoveSuccesRate e)
+    {
+        Points+= (int)e.TimingPrecision;
+        if (Points < 0) { Points = 0; }
+        _lastPrecision = e.TimingPrecision.ToString();
     }
 
     private void ToggleFullScreen()
@@ -48,10 +66,10 @@ public class DanceGame : Game
     {
         SpriteBatch = new SpriteBatch(GraphicsDevice);
         _arrowTexture = Content.Load<Texture2D>("gfx/arrows");
-       
-        
+        RegularFont = Content.Load<SpriteFont>("fonts/font");
+        BigFont = Content.Load<SpriteFont>("fonts/bigfont");
+        _dancingCow = new AnimatedImage(new Vector2(800, 400),Content.Load<Texture2D>("gfx/dancecowanimation"), 200, 4);
     }
-
 
 
     protected override void Update(GameTime gameTime)
@@ -59,15 +77,19 @@ public class DanceGame : Game
         if (Keyboard.GetState().IsKeyDown(Keys.Escape)) { Exit(); }
         base.Update(gameTime);
         _dancePatternControl.Update(gameTime);
+        _dancingCow.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
 
         SpriteBatch.Begin();
-        GraphicsDevice.Clear(Color.Navy);
+        GraphicsDevice.Clear(Color.ForestGreen);
         // SpriteBatch.Draw(_arrowTexture, Vector2.One * 300, Color.White);
         _dancePatternControl.Draw(gameTime);
+        SpriteBatch.DrawString(BigFont, $"{Points} points", new Vector2(_graphics.PreferredBackBufferWidth - 400, 50), Color.White);
+        SpriteBatch.DrawString(BigFont, $"{_lastPrecision}!", new Vector2(_graphics.PreferredBackBufferWidth - 600, 150), Color.White);
+        _dancingCow.Draw(gameTime);
         SpriteBatch.End();
     }
 }

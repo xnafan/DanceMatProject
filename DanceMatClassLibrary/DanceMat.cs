@@ -34,7 +34,6 @@ namespace DanceMatClassLibrary
         #region variables and properties
         public event EventHandler<DanceMatEventArgs>? ButtonStateChanged;
         private byte[] _lastReadData = new byte[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        private byte[] _lastWriteData = new byte[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         
         HIDDevice _device;
         //You must change these (VID/PID) to your type of Dance Mat,
@@ -71,7 +70,7 @@ namespace DanceMatClassLibrary
         }
         #endregion
 
-
+        #region Public methods
         public DanceMatState GetCurrentState()
         {
             return new DanceMatState()
@@ -87,7 +86,9 @@ namespace DanceMatClassLibrary
                 Left = _buttonStates[DanceMatButton.Left],
                 Right = _buttonStates[DanceMatButton.Right]
             };
-        }
+        } 
+        #endregion
+
         #region Internal functionality
 
         /// <summary>
