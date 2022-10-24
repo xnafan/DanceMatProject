@@ -23,7 +23,7 @@ namespace DanceMatMazeGame.components
         public DanceMat DanceMat { get; set; }
         private bool IsReadyForInput { get; set; } = false;
 
-        public float Speed { get; set; } = 3;
+        public float Speed { get; set; } = 4;
 
         #endregion
 
@@ -49,7 +49,7 @@ namespace DanceMatMazeGame.components
             CheckForDanceMatStateMatchAndRemoveIfMatch();
             if(DanceMoveControls.FirstOrDefault()?.TopLeft.Y < TopLeft.Y - ArrowSymbolSize / 2)
             {
-                SuccessfulDanceMove?.Invoke(this, new DanceMoveSuccesRate(DanceMoveControls.First().DanceMove, DanceMoveSuccesRate.Precision.Unacceptable));
+                SuccessfulDanceMove?.Invoke(this, new DanceMoveSuccesRate(DanceMoveControls.First().DanceMove, DanceMoveSuccesRate.Precision.Lost));
                 DanceMoveControls.RemoveAt(0);
                 AddRandomMove();
             }
@@ -66,9 +66,9 @@ namespace DanceMatMazeGame.components
             {
                 var firstDanceMoveControl = DanceMoveControls[0];
                 var move = firstDanceMoveControl.DanceMove;
-                DanceMoveSuccesRate.Precision timingPrecision = DanceMoveSuccesRate.Precision.Unacceptable;
+                DanceMoveSuccesRate.Precision timingPrecision = DanceMoveSuccesRate.Precision.Bad;
                 var pixelsFromPerfection = firstDanceMoveControl.TopLeft.Y - TopLeft.Y;
-                if (pixelsFromPerfection <= ArrowSymbolSize/16) { timingPrecision = DanceMoveSuccesRate.Precision.Exact; }
+                if (pixelsFromPerfection <= ArrowSymbolSize/16) { timingPrecision = DanceMoveSuccesRate.Precision.Perfect; }
                 else if (pixelsFromPerfection <= ArrowSymbolSize /12) { timingPrecision = DanceMoveSuccesRate.Precision.Close; }
                 else if (pixelsFromPerfection <= ArrowSymbolSize / 8) { timingPrecision = DanceMoveSuccesRate.Precision.Acceptable; }
                 DanceMoveSuccesRate successRate = new DanceMoveSuccesRate(move,timingPrecision);

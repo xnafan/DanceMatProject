@@ -476,7 +476,7 @@ namespace HIDInterface
             else
                 throw new Exception("Device is unable to read");
 
-            dataReceived(readData);                                     //triggers the event to be heard by the calling class
+            dataReceived?.Invoke(readData);                                     //triggers the event to be heard by the calling class
         }
 
         /// <summary>

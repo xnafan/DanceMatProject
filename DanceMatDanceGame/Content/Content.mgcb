@@ -27,6 +27,13 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/File.spritefont;fonts/Font.spritefont
 
+#begin fonts/GiantFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/GiantFont.spritefont
+
 #begin gfx/Arrows.png
 /importer:TextureImporter
 /processor:TextureProcessor
