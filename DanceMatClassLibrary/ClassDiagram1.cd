@@ -3,7 +3,6 @@
   <Class Name="DanceMatClassLibrary.DanceMat">
     <Position X="0.5" Y="0.5" Width="4.25" />
     <Members>
-      <Field Name="_buttonStates" Hidden="true" />
       <Field Name="_device" Hidden="true" />
       <Field Name="_lastReadData" Hidden="true" />
       <Field Name="DEVICE_PRODUCT_ID" Hidden="true" />
@@ -12,78 +11,17 @@
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
-    <NestedTypes>
-      <Enum Name="DanceMatClassLibrary.DanceMat.DanceMatButtonAction" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>DanceMat.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-      <Enum Name="DanceMatClassLibrary.DanceMat.DanceMatButton" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>DanceMat.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAGQACAAAAAAAAAAAAAJAgAAAAAQIAAAAIAA=</HashCode>
+      <HashCode>AAAAAAAAACQACAAAAAAAAAAAAAJAgAAAAAAAAAAAIAA=</HashCode>
       <FileName>DanceMat.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="DanceMatClassLibrary.DanceMatEventArgs">
-    <Position X="6.5" Y="1.5" Width="3.25" />
+    <Position X="5.25" Y="0.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>DanceMatEventArgs.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="HIDInterface.HIDDevice" Collapsed="true">
-    <Position X="1.5" Y="5" Width="3.25" />
-    <NestedTypes>
-      <Struct Name="HIDInterface.HIDDevice.interfaceDetails" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HIDDevice.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-      <Struct Name="HIDInterface.HIDDevice.HIDP_CAPS" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HIDDevice.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-      <Struct Name="HIDInterface.HIDDevice.SP_DEVINFO_DATA" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HIDDevice.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-      <Struct Name="HIDInterface.HIDDevice.SP_DEVICE_INTERFACE_DATA" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HIDDevice.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-      <Struct Name="HIDInterface.HIDDevice.SP_DEVICE_INTERFACE_DETAIL_DATA" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HIDDevice.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-      <Struct Name="HIDInterface.HIDDevice.HIDD_ATTRIBUTES" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HIDDevice.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-      <Struct Name="HIDInterface.HIDDevice.COMMTIMEOUTS" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HIDDevice.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-      <Delegate Name="HIDInterface.HIDDevice.dataReceivedEvent" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HIDDevice.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Delegate>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>ADSBwEECAAgKSBAEgCYggE0wBAhAAAEQCcAFiAAQYAQ=</HashCode>
-      <FileName>HIDDevice.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

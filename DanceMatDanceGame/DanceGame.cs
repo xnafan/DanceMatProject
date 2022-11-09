@@ -16,7 +16,7 @@ public class DanceGame : Game
     private Texture2D _arrowTexture, _squareTexture;
     private AnimatedImage _dancingCow;
     private DanceMovesListControl _dancePatternControl;
-    public DanceMat DanceMat { get; set; }
+    public IDanceMat DanceMat { get; set; }
     public static SpriteFont RegularFont { get; set; }
     public static SpriteFont BigFont { get; set; }
     public static SpriteFont GiantFont { get; set; }
@@ -43,7 +43,7 @@ public class DanceGame : Game
         _graphics.PreferredBackBufferWidth = 1920;
         _graphics.PreferredBackBufferHeight = 1080;
 
-         ToggleFullScreen();
+        // ToggleFullScreen();
         _graphics.ApplyChanges();
         _dancePatternControl = new DanceMovesListControl(_arrowTexture, new Vector2(200, 100), 192, DanceMat);
         _dancePatternControl.AddRandomMove();

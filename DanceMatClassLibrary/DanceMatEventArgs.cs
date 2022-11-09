@@ -1,4 +1,4 @@
-﻿using static DanceMatClassLibrary.DanceMat;
+﻿using static DanceMatClassLibrary.DanceMatKeyboardEmulator;
 
 namespace DanceMatClassLibrary
 {

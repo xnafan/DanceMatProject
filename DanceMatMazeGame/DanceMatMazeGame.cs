@@ -15,7 +15,7 @@ namespace DanceMatMazeGame
         private bool[,] _maze = new bool[40, 32];
         private Vector2 _playerPosition;
         private int _tileSize = 32;
-        private DanceMat _danceMat;
+        private IDanceMat _danceMat;
         #endregion
 
         #region Constructor and initialization
@@ -81,38 +81,38 @@ namespace DanceMatMazeGame
 
         private void _danceMat_ButtonStateChanged(object sender, DanceMatEventArgs e)
         {
-            if (e.Action != DanceMat.DanceMatButtonAction.Pressed) { return; }
+            if (e.Action != DanceMatButtonAction.Pressed) { return; }
 
             switch (e.Button)
             {
-                case DanceMat.DanceMatButton.Start:
+                case DanceMatButton.Start:
                     NewGame();
                     break;
-                case DanceMat.DanceMatButton.Select:
+                case DanceMatButton.Select:
                     //ToggleFullScreen();
                     break;
-                case DanceMat.DanceMatButton.Circle:
+                case DanceMatButton.Circle:
                     TryMove(new Vector2(1, -1));
                     break;
-                case DanceMat.DanceMatButton.Cross:
+                case DanceMatButton.Cross:
                     TryMove(new Vector2(-1, -1));
                     break;
-                case DanceMat.DanceMatButton.Square:
+                case DanceMatButton.Square:
                     TryMove(new Vector2(1, 1));
                     break;
-                case DanceMat.DanceMatButton.Triangle:
+                case DanceMatButton.Triangle:
                     TryMove(new Vector2(-1, 1));
                     break;
-                case DanceMat.DanceMatButton.Right:
+                case DanceMatButton.Right:
                     TryMove(Vector2.UnitX);
                     break;
-                case DanceMat.DanceMatButton.Up:
+                case DanceMatButton.Up:
                     TryMove(-Vector2.UnitY);
                     break;
-                case DanceMat.DanceMatButton.Down:
+                case DanceMatButton.Down:
                     TryMove(Vector2.UnitY);
                     break;
-                case DanceMat.DanceMatButton.Left:
+                case DanceMatButton.Left:
                     TryMove(-Vector2.UnitX);
                     break;
                 default:

@@ -20,7 +20,7 @@ namespace DanceMatMazeGame.components
         public Texture2D ArrowTexture { get; }
         public int ArrowSymbolSize { get; private set; }
         public List<DanceMoveControl> DanceMoveControls { get; set; } = new();
-        public DanceMat DanceMat { get; set; }
+        public IDanceMat DanceMat { get; set; }
         private bool IsReadyForInput { get; set; } = false;
 
         public float Speed { get; set; } = 4;
@@ -33,7 +33,7 @@ namespace DanceMatMazeGame.components
 
         #region Constructor
 
-        public DanceMovesListControl(Texture2D arrowTexture, Vector2 topLeft, int arrowSymbolSize, DanceMat danceMat)
+        public DanceMovesListControl(Texture2D arrowTexture, Vector2 topLeft, int arrowSymbolSize, IDanceMat danceMat)
         {
             ArrowTexture = arrowTexture;
             TopLeft = topLeft;

@@ -5,7 +5,7 @@ namespace DanceMatVisualizerWindow
 {
     public partial class MainForm : Form
     {
-        private DanceMat _danceMat = new DanceMat();
+        private IDanceMat _danceMat = new DanceMat();
         public MainForm()
         {
             InitializeComponent();
@@ -17,7 +17,7 @@ namespace DanceMatVisualizerWindow
         private void TmrRepaint_Tick(object? sender, EventArgs e) => RepaintPictureBox();
         private void _danceMat_ButtonStateChanged(object? sender, DanceMatEventArgs e)
         {
-            picBoxDanceMat.ButtonPressed[e.Button] = e.Action == DanceMat.DanceMatButtonAction.Pressed;
+            picBoxDanceMat.ButtonPressed[e.Button] = e.Action == DanceMatButtonAction.Pressed;
             Debug.WriteLine(_danceMat.GetCurrentState());
         }
 
