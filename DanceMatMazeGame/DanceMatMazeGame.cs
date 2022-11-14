@@ -12,7 +12,7 @@ namespace DanceMatMazeGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _tileset;
-        private bool[,] _maze = new bool[40, 32];
+        private bool[,] _maze = new bool[20, 16];
         private Vector2 _playerPosition;
         private int _tileSize = 32;
         private IDanceMat _danceMat;
@@ -24,7 +24,7 @@ namespace DanceMatMazeGame
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            _danceMat = new DanceMat();
+            _danceMat = new DanceMatKeyboardEmulator();
             _danceMat.ButtonStateChanged += _danceMat_ButtonStateChanged;
         }
 

@@ -9,14 +9,14 @@ public class DanceMatKeyboardEmulator : DanceMatBase
 
     private object HandleKeyboardInput(KeyboardHookEventArgs khea)
     {
-       switch (khea.Key)
+        switch (khea.Key)
         {
             #region Up, down, left, right
             case Dapplo.Windows.Input.Enums.VirtualKeyCode.Up:
             case Dapplo.Windows.Input.Enums.VirtualKeyCode.Numpad8:
                 OnButtonStateChanged(DanceMatButton.Up, khea.IsKeyDown ? DanceMatButtonAction.Pressed : DanceMatButtonAction.Released);
                 break;
-            case Dapplo.Windows.Input.Enums.VirtualKeyCode.Left:
+            case Dapplo.Windows.Input.Enums.VirtualKeyCode.Right:
             case Dapplo.Windows.Input.Enums.VirtualKeyCode.Numpad6:
                 OnButtonStateChanged(DanceMatButton.Right, khea.IsKeyDown ? DanceMatButtonAction.Pressed : DanceMatButtonAction.Released);
                 break;
@@ -24,7 +24,7 @@ public class DanceMatKeyboardEmulator : DanceMatBase
             case Dapplo.Windows.Input.Enums.VirtualKeyCode.Numpad2:
                 OnButtonStateChanged(DanceMatButton.Down, khea.IsKeyDown ? DanceMatButtonAction.Pressed : DanceMatButtonAction.Released);
                 break;
-            case Dapplo.Windows.Input.Enums.VirtualKeyCode.Right:
+            case Dapplo.Windows.Input.Enums.VirtualKeyCode.Left:
             case Dapplo.Windows.Input.Enums.VirtualKeyCode.Numpad4:
                 OnButtonStateChanged(DanceMatButton.Left, khea.IsKeyDown ? DanceMatButtonAction.Pressed : DanceMatButtonAction.Released);
                 break;

@@ -33,7 +33,8 @@ public class DanceGame : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        DanceMat = new DanceMat();
+        //DanceMat = new DanceMat();
+        DanceMat = new DanceMatKeyboardEmulator();
     }
 
     protected override void Initialize()
@@ -43,7 +44,7 @@ public class DanceGame : Game
         _graphics.PreferredBackBufferWidth = 1920;
         _graphics.PreferredBackBufferHeight = 1080;
 
-        // ToggleFullScreen();
+         ToggleFullScreen();
         _graphics.ApplyChanges();
         _dancePatternControl = new DanceMovesListControl(_arrowTexture, new Vector2(200, 100), 192, DanceMat);
         _dancePatternControl.AddRandomMove();
